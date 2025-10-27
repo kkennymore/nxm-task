@@ -1,0 +1,27 @@
+.button-container {
+  position: relative;
+  width: 100%;
+  max-width: 230px;
+  height: 45px;
+  background-size: cover; 
+  background-position: 10%;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.button-container span{
+    text-align: right;
+    min-width: 180px;
+    position: absolute;
+    right: 8%;
+    top: 25%;
+    color: #ffffff;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,89 @@
+networks:
+  nxmNetworks:
+    driver: bridge
+
+services:
+  # frontend 
+  nxm_frontend:
+    build:
+      context: ./nxm-frontend
+      dockerfile: Dockerfile
+    container_name:  ${NXM_FRONTEND_CONTAINER}
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT}:80"
+    networks:
+      - nxmNetworks
+
+  # laravel backend api
+  nxm_backend:
+    container_name: ${NXM_BACKEND_CONTAINER}
+    image: nxm_backend
+    build:
+      context: ./nxm-backend
+      dockerfile: Dockerfile
+    ports:
+      - "${BACKEND_PORT}:80"
+    volumes:
+      - ./volumes/backend:/var/www/html
+    depends_on:
+      - ${NXM_DATABASE_CONTAINER}
+      - ${NXM_REDIS_CONTAINER}
+    networks:
+      - nxmNetworks
+
+    # ---------- MariaDB ----------
+  nxm_db:
+    container_name: ${NXM_DATABASE_CONTAINER}
+    image: mariadb:10.11
+    restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "nxm_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ALLOW_EMPTY_PASSWORD: "no"
+    ports:
+      - "127.0.0.1:${DATABASE_PORT}:3306"
+    volumes:
+      - ./volumes/database:/var/lib/mysql
+    networks:
+      - nxmNetworks
+
+  # ---------- PhpMyAdmin ----------
+  nxm_phpmyadmin:
+    container_name: ${NXM_PHPMYADMIN_CONTAINER}
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    environment:
+      PMA_HOST: ${NXM_DATABASE_CONTAINER}
+      PMA_PORT: ${DATABASE_PORT}
+      PMA_ALLOW_NO_PASSWORD: "false"
+    ports:
+      - "127.0.0.1:${PHPMYADMIN_PORT}:80"
+    depends_on:
+      - ${NXM_DATABASE_CONTAINER}
+    networks:
+      - nxmNetworks
+
+  # ---------- Redis -------------
+  nxm_redis:
+    container_name: ${NXM_REDIS_CONTAINER}
+    image: redis
+    ports:
+      - "127.0.0.1:${REDIS_PORT}:6379"
+    volumes:
+      - ./volumes/redis:/data
+    command: redis-server --appendonly yes
+    networks:
+      - nxmNetworks
+
+# volumes:
+#   mysql_data:
+#   mailserver_data:
