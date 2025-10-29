@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, watch } from "vue";
 import CommissionTable from "@/components/CommissionTable.vue";
 import RequestService from "@/services/RequestService.js";
 import apiEndpoint from "@/config/apiEndpoint.js";
 
-// State
+// --- State ---
 const allCommissions = ref([]);
 const displayedCommissions = ref([]);
 const page = ref(1);
@@ -18,27 +18,38 @@ function setLoading(value) {
 
 // --- Fetch all data once from backend ---
 async function fetchData() {
-  setLoading(true);
+  try {
+    setLoading(true);
 
-  const query = new URLSearchParams({
-    distributor: filters.value.distributor,
-    date_from: filters.value.date_from,
-    date_to: filters.value.date_to,
-  }).toString();
+    const query = new URLSearchParams({
+      distributor: filters.value.distributor || "",
+      date_from: filters.value.date_from || "",
+      date_to: filters.value.date_to || "",
+    }).toString();
 
-  const response = await RequestService.get(`${apiEndpoint.commissions}?${query}`, {
-    isLoading: setLoading,
-  });
+    const response = await RequestService.get(`${apiEndpoint.commissions}?${query}`, {
+      isLoading: setLoading,
+    });
 
-  allCommissions.value = response.data || [];
-  updateDisplayedPage();
-  setLoading(false);
+    // Handle possible API variations
+    allCommissions.value = Array.isArray(response.data)
+      ? response.data
+      : response.data?.data || [];
+
+    updateDisplayedPage();
+  } catch (error) {
+    console.error("Error fetching commissions:", error);
+  } finally {
+    setLoading(false);
+  }
 }
 
 // --- Compute total pages dynamically ---
-const totalPages = computed(() => Math.ceil(allCommissions.value.length / perPage));
+const totalPages = computed(() =>
+  Math.ceil(allCommissions.value.length / perPage)
+);
 
-// --- Function to update data for the current page ---
+// --- Update data for the current page ---
 function updateDisplayedPage() {
   const start = (page.value - 1) * perPage;
   const end = start + perPage;
@@ -49,25 +60,26 @@ function updateDisplayedPage() {
 function nextPage() {
   if (page.value < totalPages.value) {
     page.value++;
-    updateDisplayedPage();
   }
 }
 
 function prevPage() {
   if (page.value > 1) {
     page.value--;
-    updateDisplayedPage();
   }
 }
 
-// --- Reactively refresh table when filters change ---
+// --- Watch for page changes (auto update displayed data) ---
+watch(page, updateDisplayedPage);
+
+// --- Reactively apply filters ---
 async function applyFilters() {
   page.value = 1;
   await fetchData();
 }
 
 // --- Load data on component mount ---
-onMounted(() => fetchData());
+onMounted(fetchData);
 </script>
 
 <template>
@@ -75,7 +87,7 @@ onMounted(() => fetchData());
     <h2 class="text-xl font-semibold mb-4">Commission Report</h2>
 
     <!-- Filters -->
-    <div class="flex gap-4 mb-4">
+    <div class="flex flex-wrap gap-4 mb-4 items-center">
       <input
         v-model="filters.distributor"
         type="text"
@@ -84,18 +96,28 @@ onMounted(() => fetchData());
       />
       <input v-model="filters.date_from" type="date" class="border rounded p-2" />
       <input v-model="filters.date_to" type="date" class="border rounded p-2" />
-      <button @click="applyFilters" class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
+      <button
+        @click="applyFilters"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition"
+      >
+        Filter
+      </button>
     </div>
 
-    <!-- Table -->
-    <CommissionTable :data="displayedCommissions" :loading="loading" />
+    <div>
+      <!-- Table -->
+     <CommissionTable :commData="displayedCommissions" :loading="loading" />
+    </div>
 
     <!-- Pagination -->
-    <div v-if="totalPages > 1" class="flex justify-center mt-4 gap-2">
+    <div
+      v-if="totalPages > 1"
+      class="flex justify-center items-center mt-4 gap-2 text-gray-700"
+    >
       <button
         :disabled="page <= 1"
         @click="prevPage"
-        class="px-3 py-1 border rounded disabled:opacity-50"
+        class="px-3 py-1 border rounded disabled:opacity-50 hover:bg-gray-100"
       >
         Prev
       </button>
@@ -105,7 +127,7 @@ onMounted(() => fetchData());
       <button
         :disabled="page >= totalPages"
         @click="nextPage"
-        class="px-3 py-1 border rounded disabled:opacity-50"
+        class="px-3 py-1 border rounded disabled:opacity-50 hover:bg-gray-100"
       >
         Next
       </button>

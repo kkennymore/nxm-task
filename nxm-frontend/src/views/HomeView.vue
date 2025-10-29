@@ -5,7 +5,6 @@ import Area4 from '@/components/Area4.vue';
 import Area2 from '@/components/Area2.vue';
 import Influencer from '@/components/Influencer.vue';
 import LearnMore from '@/components/LearnMore.vue';
-import Footer from '@/components/Footer.vue';
 import FormSection from '@/components/FormSection.vue';
 
 const userState = reactive({
@@ -37,7 +36,5 @@ onMounted(() => {
     <LearnMore />
     <!-- register section -->
     <FormSection/>
-    <!-- footer section -->
-    <Footer/>
   </section>
 </template>

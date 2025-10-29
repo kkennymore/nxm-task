@@ -11,7 +11,7 @@ const benPopUp = async () => {
 </script>
 
 <template>
-    <section class="w-12 bg-[#1E90FF]">
+    <section>
         <div class="banner-container">
             <CustomAnimation>
                 <div class="banner-title-wrap">
