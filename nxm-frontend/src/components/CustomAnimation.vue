@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, watchEffect } from "vue";
 
 const props = defineProps({
@@ -21,7 +21,7 @@ const animationStyle = ref({
     transition: `all ${props.delay}s cubic-bezier(0.30, 0.80, 0.99, 1) ${props.duration}s`
 });
 
-const observer = ref(null);
+const observer = ref<IntersectionObserver | null>(null);
 
 // Check if the element is in view using IntersectionObserver
 const observeElement = () => {

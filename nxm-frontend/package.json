@@ -15,6 +15,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "framer-motion": "^12.23.24",
     "lucide-vue-next": "^0.548.0",
     "vue": "^3.5.22",

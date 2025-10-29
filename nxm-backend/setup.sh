@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load environment variables
-source "./../.env"
+source ".env"
 
 # Function to wait for MySQL to be ready
 wait_for_mysql() {
@@ -41,7 +41,7 @@ setup_laravel() {
 grant_full_mysql_privileges() {
     echo "Granting full privileges to ${DB_USERNAME}..."
 
-    docker exec -i "${NXM_DATABASE_CONTAINER}" mysql -uroot -p"${DB_PASSWORD}" <<EOF
+    docker exec -i "${NXM_MYSQL_CONTAINER}" mysql -uroot -p"${DB_PASSWORD}" <<EOF
     -- Create user if it doesn't exist
     CREATE USER IF NOT EXISTS '${DB_USERNAME}'@'%' IDENTIFIED BY '${DB_PASSWORD}';
 
@@ -55,13 +55,14 @@ EOF
     echo "Granted full root-like privileges to ${DB_USERNAME}"
 }
 
+
 # Main function to run the entire setup process
 main() {
     # Wait for MySQL to be ready
-    wait_for_mysql
+    # wait_for_mysql
 
     # Setup Laravel environment and database
-    setup_laravel
+    # setup_laravel
 
     # Grant full privileges to the DB user
     grant_full_mysql_privileges

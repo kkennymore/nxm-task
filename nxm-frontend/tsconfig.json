@@ -1,5 +1,4 @@
 {
-  "files": [],
   "references": [
     {
       "path": "./tsconfig.node.json"
@@ -10,5 +9,25 @@
     {
       "path": "./tsconfig.vitest.json"
     }
+  ],
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "outDir": "dist/types",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vite/client"] // for Vite projects
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    "src/**/*.js",
+    "src/**/*.json"
   ]
 }

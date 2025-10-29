@@ -8,17 +8,24 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         //
     }
 
     /**
      * Bootstrap any application services.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        if (app()->environment('testing')) {
+            // Prevent any artisan migrate:fresh or migration triggers
+            config(['database.migrations' => 'disabled']);
+        }
     }
 }

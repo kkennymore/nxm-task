@@ -11,14 +11,14 @@ const benPopUp = async () => {
 </script>
 
 <template>
-    <section class="banner-wrap">
+    <section class="w-12 bg-[#1E90FF]">
         <div class="banner-container">
             <CustomAnimation>
                 <div class="banner-title-wrap">
                     <h1 class="banner-title">Collagen is the Fountain of Youth</h1>
                     <h4 class="banner-subtitle">What's Your Influence?</h4>
                     <p>
-                        <ConnectBtn :btnImg="sitename" :method="benPopUp" btn-text="Connect with Ben" />
+                        <ConnectBtn :btnImg="sitename" :method="benPopUp" btn-text="Connect with Ben" textAlign="right" />
                     </p>
                 </div>
             </CustomAnimation>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, type CSSProperties } from "vue";
 
 // Defining props with default values
 const props = defineProps({
@@ -20,23 +20,22 @@ const props = defineProps({
     default: '0 auto' // Default margin
   },
   align: {
-    type: String,
+    type: null,
     default: 'center' // Default text alignment
   }
 });
-</script>
-
-<template>
-  <section 
-    :style="{
+// style
+const cardStyle: CSSProperties = {
       backgroundColor: props.bgColor,
       borderRadius: `${props.radius}px`,
       padding: `${props.padding}px`,
       margin: props.margin,
-      textAlign: props.align
-    }"
-    class="card"
-  >
+      textAlign: props.align,
+};
+</script>
+
+<template>
+  <section :style="cardStyle" class="card">
     <slot></slot>
   </section>
 </template>
