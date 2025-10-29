@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script setup>
 import { RouterLink } from 'vue-router';
-import apiEndpoint from '../router/appEndpoint';
+import appEndpoint from '@/config/appEndpoint';
 import a1 from "@/assets/images/a.webp";
 import g17 from "@/assets/images/G17.webp";
 import g19 from "@/assets/images/G19.webp";

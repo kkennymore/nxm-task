@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script setup>
 import sitename from "@/assets/images/sitename.png";
-import ConnectBtn from './ConnectBtn.vue';
+import ConnectBtn from '@/components/ConnectBtn.vue';
 import CustomAnimation from '@/components/CustomAnimation.vue';
 
 const learnMore = () => {

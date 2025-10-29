@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import CustomAnimation from '@/components/CustomAnimation.vue';
 </script>
 <template>

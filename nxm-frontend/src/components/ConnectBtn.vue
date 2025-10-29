@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, type PropType, type CSSProperties } from 'vue';
+import { defineProps, type CSSProperties } from 'vue';
 
 // Defining props with default values
 const props = defineProps({
@@ -16,7 +16,7 @@ const props = defineProps({
     default: "center"
   },
   method: {
-    type: Function as PropType<(e: Event) => void>,
+    type: null,
     default: () => {}
   }
 });

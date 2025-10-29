@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script setup>
 import { RouterLink } from 'vue-router';
-import apiEndpoint from '../router/appEndpoint';
+import appEndpoint from '@/config/appEndpoint';
 import CustomAnimation from '@/components/CustomAnimation.vue';
 </script>
 

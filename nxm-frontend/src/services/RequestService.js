@@ -1,4 +1,4 @@
-export default class RequestMethods {
+export default class RequestService {
   static sessionCookie = null; 
   static authLogout = null; 
   static tokenRefreshHandler = null;

@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script setup>
 import { RouterLink } from 'vue-router';
-import apiEndpoint from '../router/appEndpoint';
+import appEndpoint from '@/config/appEndpoint';
 import { Facebook, Linkedin, Instagram, Twitter, Menu, X } from 'lucide-vue-next';
 import logo from "../assets/logo.webp";
 import CustomAnimation from './CustomAnimation.vue';
@@ -22,22 +22,22 @@ import CustomAnimation from './CustomAnimation.vue';
           <!-- Center Navigation Links -->
           <ul class="nav-links-wrap">
             <li>
-              <RouterLink :to="apiEndpoint.home">
+              <RouterLink :to="appEndpoint.home">
                 Home
               </RouterLink>
             </li>
             <li>
-              <RouterLink :to="apiEndpoint.shop">
+              <RouterLink :to="appEndpoint.shop">
                 Shop
               </RouterLink>
             </li>
             <li>
-              <RouterLink :to="apiEndpoint.aboutUs">
+              <RouterLink :to="appEndpoint.aboutUs">
                 About Us
               </RouterLink>
             </li>
             <li>
-              <RouterLink :to="apiEndpoint.influencer">
+              <RouterLink :to="appEndpoint.influencer">
                 Be an Influencer
               </RouterLink>
             </li>
