@@ -1,66 +1,226 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# NXM Assessment Backend Task – Laravel 9 + MariaDB 10
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project implements the **NXM Commission and Distributor Report System**, developed using **Laravel 9** and **MariaDB 10**.  
+It uses the provided database schema (no structural modifications) and builds all reporting logic through **SQL Views**, **Stored Functions**, and **Eloquent Repositories**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Uses the **provided database schema** — no alterations.
+- Adds optimized **views** and **indexes** for performance.
+- Implements:
+  - Distributor report with ranking and sales totals.
+  - Commission report with referred distributor count and computed commissions.
+- Supports **filtering** by:
+  - Distributor (by ID, first name, or last name)
+  - Order date (by `date_from`, `date_to`, or both)
+- Fully covered by **Unit and Feature Tests**.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 8.1+
+- Composer
+- MariaDB 10.x or MySQL 8.x
+- Laravel 9.x
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation Steps
 
-## Laravel Sponsors
+1. **Clone the repository**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+   ```bash
+   git clone https://github.com/kkennymore/nxm-task.git
+   cd nxm-backend
+````
 
-### Premium Partners
+2. **Install dependencies**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+   ```bash
+   composer install
+   ```
 
-## Contributing
+3. **Environment setup**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   Copy the example environment file and update your database settings:
 
-## Code of Conduct
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   Update the `.env` file with your credentials:
 
-## Security Vulnerabilities
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nxm_assessment
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🗄️ Database Setup
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Option 1 — Migrate with Views Only
+
+The migrations will create **views, functions, and indexes** only.
+
+```bash
+php artisan migrate
+```
+
+### Option 2 — Import Existing Schema and Data
+
+If you already have the provided SQL schema and data (e.g. `nxm_assessment_2023.sql`):
+
+```bash
+mysql -u root -p nxm_assessment < nxm_assessment_2023.sql
+```
+
+Then run the Laravel-specific migrations to add reporting views:
+
+```bash
+php artisan migrate
+```
+
+> **Note:** The app does not alter existing tables — only adds views and indexes.
+
+---
+
+## Running Tests
+
+The project includes **Unit and Feature tests** for both the repositories and API endpoints.
+
+Run all tests:
+
+```bash
+php artisan test -v
+```
+
+You can also test individual classes, for example:
+
+```bash
+php artisan test --filter=CommissionRepositoryTest
+php artisan test --filter=DistributorApiTest
+```
+
+> Tests run against the **testing database** defined in `.env.testing`.
+> You can import your SQL dump there if you wish to test with real data.
+
+---
+
+## Expected Outputs
+
+The commission calculations and reports are validated against these known results:
+
+| Invoice  | Expected Commission |
+| -------- | ------------------: |
+| ABC4170  |               $6.00 |
+| ABC6931  |              $37.20 |
+| ABC23352 |              $27.60 |
+| ABC3010  |               $0.00 |
+| ABC19323 |               $0.00 |
+
+All other report columns and filters (Distributor, Date Range, Order Totals, etc.) match the original specification.
+
+---
+
+## Project Structure
+
+```
+app/
+ ├────Http/
+ │    ├── Controllers/
+ │    │    └── Api/
+ │    │         ├── CommissionController.php
+ │    │         └── DistributorController.php
+ │    └── Requests/
+ │    │    └── CommissionFilterRequest.php
+ │    │    └── DateRangeRequest.php
+ │    │    └── ShowInvoiceRequest.php
+ │    └── Resources/
+ │    │    └── CommissionResource.php
+ │    │    └── DistributorResource.php
+ │    │    └── InvoiceDetailResource.php
+ │    │    └── InvoiceItemResource.php
+ │    │
+ ├────Models/
+ │    ├── Product.php
+ │    ├── User.php
+ │    └── OrderItem.php
+ │    └── Order.php
+ │    
+ ├────Repositories/
+ │    ├── Contracts/
+ │    │    ├── CommissionRepositoryInterface.php
+ │    │    └── DistributorRepositoryInterface.php
+ │    └── Eloquent/
+ │         ├── CommissionRepository.php
+ │         └── DistributorRepository.php
+ │
+ ├────Services/
+ │    ├── CommissionService.php
+ │    └── DistributorService.php
+ │
+ ├────Providers/
+ │    ├── RepositoryServiceProvider.php
+ │    └── ...
+ database/
+ ├────migrations/
+ │    ├── 2023_XX_XX_XXXXXX_create_commission_view.php
+ │    ├── 2023_XX_XX_XXXXXX_create_distributor_sales_view.php
+ │    └── ...
+ │
+routes/
+ ├────api.php
+ └────web.php
+ │
+tests/
+ ├────Feature/
+ │    ├── CommissionApiTest.php
+ │    └── DistributorApiTest.php
+ └────Unit/
+      ├── CommissionRepositoryTest.php
+      └── DistributorRepositoryTest.php
+```
+
+---
+
+## Notes
+
+* The project uses **Eloquent Repositories** to abstract data access.
+* Commission computations are handled at the **SQL View** level for performance.
+* Tests are **idempotent** — they don’t refresh or truncate your manually imported data.
+
+---
+
+## Troubleshooting
+
+If tests fail due to missing views:
+
+```bash
+php artisan migrate:fresh
+php artisan migrate
+```
+
+If you get DB connection errors during tests:
+
+```bash
+cp .env .env.testing
+php artisan config:clear
+```
+
+---
+
+### Author
+
+**[Usiobaifo A Kenneth]**
+Software Engineer • Laravel | MariaDB | Clean Architecture
+
+---

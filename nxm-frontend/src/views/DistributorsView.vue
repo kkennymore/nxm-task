@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, watch } from "vue";
 import DistributorTable from "@/components/DistributorTable.vue";
 import RequestService from "@/services/RequestService.js";
 import apiEndpoint from "@/config/apiEndpoint.js";
@@ -16,44 +16,57 @@ function setLoading(value) {
 }
 
 // --- Fetch all distributors once ---
-async function fetchData() {
-  setLoading(true);
-  const response = await RequestService.get(apiEndpoint.distributors, {
-    isLoading: setLoading,
-  });
+async function _fetchData() {
+  try {
+    setLoading(true);
 
-  allDistributors.value = response.data || [];
-  updateDisplayedPage();
-  setLoading(false);
+    const response = await RequestService.get(apiEndpoint.distributors, {
+      isLoading: setLoading,
+    });
+
+    // Handle possible nested API responses
+    allDistributors.value = Array.isArray(response.data)
+      ? response.data
+      : response.data?.data || [];
+
+    _updateDisplayedPage();
+  } catch (error) {
+    console.error("Error fetching distributors:", error);
+  } finally {
+    setLoading(false);
+  }
 }
 
 // --- Compute total pages dynamically ---
-const totalPages = computed(() => Math.ceil(allDistributors.value.length / perPage));
+const totalPages = computed(() =>
+  Math.ceil(allDistributors.value.length / perPage)
+);
 
 // --- Update visible records for current page ---
-function updateDisplayedPage() {
+function _updateDisplayedPage() {
   const start = (page.value - 1) * perPage;
   const end = start + perPage;
   displayedDistributors.value = allDistributors.value.slice(start, end);
 }
 
 // --- Pagination Handlers ---
-function nextPage() {
+function _nextPage() {
   if (page.value < totalPages.value) {
     page.value++;
-    updateDisplayedPage();
   }
 }
 
-function prevPage() {
+function _prevPage() {
   if (page.value > 1) {
     page.value--;
-    updateDisplayedPage();
   }
 }
 
+// --- Watch for page changes to update displayed data ---
+watch(page, _updateDisplayedPage);
+
 // --- Fetch data on mount ---
-onMounted(() => fetchData());
+onMounted(_fetchData);
 </script>
 
 <template>
@@ -61,14 +74,19 @@ onMounted(() => fetchData());
     <h2 class="text-xl font-semibold mb-4">Distributor Sales Report</h2>
 
     <!-- Table -->
-    <DistributorTable :data="displayedDistributors" :loading="loading" />
+    <div>
+      <DistributorTable :data="displayedDistributors" :loading="loading" />
+    </div>
 
     <!-- Pagination -->
-    <div v-if="totalPages > 1" class="flex justify-center mt-4 gap-2">
+    <div
+      v-if="totalPages > 1"
+      class="flex justify-center items-center mt-4 gap-2 text-gray-700"
+    >
       <button
         :disabled="page <= 1"
-        @click="prevPage"
-        class="px-3 py-1 border rounded disabled:opacity-50"
+        @click="_prevPage"
+        class="px-3 py-1 border rounded disabled:opacity-50 hover:bg-gray-100"
       >
         Prev
       </button>
@@ -77,8 +95,8 @@ onMounted(() => fetchData());
 
       <button
         :disabled="page >= totalPages"
-        @click="nextPage"
-        class="px-3 py-1 border rounded disabled:opacity-50"
+        @click="_nextPage"
+        class="px-3 py-1 border rounded disabled:opacity-50 hover:bg-gray-100"
       >
         Next
       </button>
