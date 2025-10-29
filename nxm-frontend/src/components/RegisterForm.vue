@@ -1,11 +1,11 @@
 <script setup >
 import { reactive, onMounted, ref } from 'vue';
-import FormInput from './FormInput.vue';
-import ConnectBtn from './ConnectBtn.vue';
-import Spacer from './Spacer.vue';
-import { getIndexDb, setIndexDb } from '../services/LocalStorageService';
+import FormInput from '@/components/FormInput.vue';
+import ConnectBtn from '@/components/ConnectBtn.vue';
+import Spacer from '@/components/Spacer.vue';
+import { getIndexDb, setIndexDb } from '@/services/LocalStorageService';
 import { validateForm } from '@/services/ValidationService';
-import GoogleRecaptcha from './GoogleRecaptcha.vue';
+import GoogleRecaptcha from '@/components/GoogleRecaptcha.vue';
 
 
 const recaptchaRef = ref(null);
@@ -139,11 +139,11 @@ async function handleSubmit(e) {
       :callBack="stateChange"
       :required="true"
     />
-    <GoogleRecaptcha
+    <!-- <GoogleRecaptcha
       siteKey="6LdUH_orAAAAAPLJ9A_CFkUOHUeY7Bp2LOsGlZuC"
       :verified="onCaptchaVerified"
       :expired="onCaptchaExpired"
-    />
+    /> -->
     <Spacer height="5px" />
 
     <ConnectBtn btnText="Register" />

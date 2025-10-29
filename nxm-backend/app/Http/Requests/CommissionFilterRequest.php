@@ -12,7 +12,8 @@ class CommissionFilterRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // Allow public access or API auth if needed
+        // Allow public access or API auth for now.
+        return true; 
     }
 
     public function rules(): array

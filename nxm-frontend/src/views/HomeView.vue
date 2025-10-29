@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { reactive, onMounted } from 'vue';
 import Banner from '@/components/Banner.vue';
 import Area4 from '@/components/Area4.vue';

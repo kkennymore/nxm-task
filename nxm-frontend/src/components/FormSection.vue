@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script setup>
 import CustomAnimation from '@/components/CustomAnimation.vue';
 import user from "@/assets/images/group.webp";
-import RegisterForm from './RegisterForm.vue';
+import RegisterForm from '@/components/RegisterForm.vue';
 </script>
 
 <template>

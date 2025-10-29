@@ -11,7 +11,8 @@ class DateRangeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // Allow all authenticated (or public) users
+        // Allow public access or API auth if needed
+        return true;
     }
 
     public function rules(): array

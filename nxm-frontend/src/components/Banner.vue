@@ -1,8 +1,8 @@
-<script setup lang="ts">
+<script setup>
 import { RouterLink } from 'vue-router';
-import apiEndpoint from '../router/appEndpoint';
+import appEndpoint from '@/config/appEndpoint';
 import sitename from "@/assets/images/sitename.png";
-import ConnectBtn from './ConnectBtn.vue';
+import ConnectBtn from '@/components/ConnectBtn.vue';
 import CustomAnimation from '@/components/CustomAnimation.vue';
 
 const benPopUp = async () => {

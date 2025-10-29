@@ -1,12 +1,3 @@
-/* Universal Reset */
-@font-face {
-    font-family: 'Gotham light';
-    src: url('./../../fonts/Gotham/Gotham Light/Gotham Light.otf');
-    /* url('@/assets/fonts/Gotham-Bold.ttf') format('truetype'); */
-    font-weight: 400;
-    font-style: normal;
-}
-
 *,
 *::before,
 *::after {
@@ -20,14 +11,10 @@
     font-weight: 400;
     vertical-align: baseline;
     -webkit-text-size-adjust: 100%;
-    /* Ensure font size adjustment consistency on mobile */
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
-    /* Improve font rendering for clarity */
 }
-
-/* Ensure HTML5 elements behave consistently */
 article,
 aside,
 details,
@@ -49,16 +36,6 @@ progress,
 video {
     display: inline-block;
     vertical-align: baseline;
-}
-
-/* Remove default link styling, make them inherit text color and transparent background */
-a {
-    color: inherit;
-    background-color: transparent;
-    text-decoration: none;
-    transition: color 0.3s ease, transform 0.2s ease-in-out;
-    display: block;
-    border-bottom: 1px solid transparent;
 }
 
 /* Fix images scaling issues */

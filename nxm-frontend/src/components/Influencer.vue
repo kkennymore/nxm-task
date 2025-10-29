@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import user1 from "@/assets/images/user1.webp";
 import user2 from "@/assets/images/user2.webp";
 import user3 from "@/assets/images/user3.webp";

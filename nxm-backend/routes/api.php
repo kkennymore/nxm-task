@@ -24,4 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::get('/distributors/top', [DistributorController::class, 'top']);
     Route::get('/commissions', [CommissionController::class, 'index']);
+    Route::get('/commissions/{invoice}', [CommissionController::class, 'show']);
 });

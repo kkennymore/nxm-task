@@ -12,13 +12,6 @@ export default defineConfig({
     ],
     server: {
         port: 3000,
-        proxy: {
-            '/backend': {
-                target: 'http://localhost:7000',
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/backend/, ''),
-            }
-        }
     },
     resolve: {
         alias: {

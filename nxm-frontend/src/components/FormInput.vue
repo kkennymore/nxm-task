@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { PropType, computed } from 'vue';
+<script setup >
+import { computed } from 'vue';
 import { removeSpaces } from '@/services/RegexService';
-import CustomAnimation from './CustomAnimation.vue';
+import CustomAnimation from '@/components/CustomAnimation.vue';
 
 const props = defineProps({
   text: String,
@@ -27,7 +27,7 @@ const props = defineProps({
 
   // ✅ Properly typed callback
   callBack: {
-    type: Function as PropType<(e: Event) => void>,
+    type: Function,
     default: () => {},
   },
 });
@@ -36,12 +36,12 @@ const fieldName = computed(
   () => removeSpaces(props.text?.trim()?.toLowerCase() || '')
 );
 
-const selectValue = (option: any) =>
+const selectValue = (option) =>
   props.selectKey === ''
     ? option?.toString().toLowerCase()
     : option[props.selectKey]?.toString().toLowerCase() || '';
 
-const selectLabel = (option: any) =>
+const selectLabel = (option) =>
   props.selectKey === '' ? option : option[props.selectKey];
 </script>
 
@@ -52,7 +52,7 @@ const selectLabel = (option: any) =>
         {{ props.text }}
       </span>
 
-      <!-- ✅ Input with correct typing -->
+      <!-- Input with correct typing -->
       <div v-if="props.isForm" :class="['form-control', props.errorsData ? 'error' : '']">
         <input
           :name="fieldName"
@@ -60,27 +60,27 @@ const selectLabel = (option: any) =>
           :type="props.inputType"
           :placeholder="`${props.text}${props.required ? ' *' : ' (optional)'}`"
           :value="props.formValueData"
-          @input="(e: InputEvent) => props.callBack(e)"
+          @input="(e) => props.callBack(e)"
           :class="props.formValueData && !props.errorsData ? 'valid' : ''"
         />
       </div>
 
-      <!-- ✅ Button -->
+      <!-- Button -->
       <button
         v-if="props.isBtn"
         :style="props.buttonStyle"
-        @click="(e: MouseEvent) => props.callBack(e)"
+        @click="(e) => props.callBack(e)"
         class="edit-button"
       >
         {{ props.buttonValueData }}
       </button>
 
-      <!-- ✅ Static text -->
+      <!-- Static text -->
       <div v-if="props.isText">
         <span :style="props.textValueStyle">{{ props.textValueData }}</span>
       </div>
 
-      <!-- ✅ Select -->
+      <!-- Select -->
       <div
         v-if="props.isSelect"
         :style="props.selectStyle"
@@ -91,7 +91,7 @@ const selectLabel = (option: any) =>
           :name="fieldName"
           class="complete-form-select"
           :class="props.selectValueData && !props.errorsData ? 'valid' : ''"
-          @change="(e: Event) => props.callBack(e)"
+          @change="(e) => props.callBack(e)"
           :value="props.selectValueData"
         >
           <option value="">{{ props.selectDefaultText }}</option>

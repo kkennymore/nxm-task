@@ -1,9 +1,9 @@
-<script setup lang="ts">
-import apiEndpoint from '@/router/appEndpoint';
+<script setup>
+import appEndpoint from "@/config/appEndpoint.js";
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const goHome = () => router.push(apiEndpoint.home);
+const goHome = () => router.push(appEndpoint.home);
 </script>
 
 <template>
