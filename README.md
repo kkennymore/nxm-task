@@ -135,7 +135,7 @@ All other report columns and filters (Distributor, Date Range, Order Totals, etc
 
 ```
 app/
- ├── Http/
+ ├────Http/
  │    ├── Controllers/
  │    │    └── Api/
  │    │         ├── CommissionController.php
@@ -143,17 +143,20 @@ app/
  │    └── Requests/
  │    │    └── CommissionFilterRequest.php
  │    │    └── DateRangeRequest.php
+ │    │    └── ShowInvoiceRequest.php
  │    └── Resources/
- │         └── CommissionResource.php
- │         └── DistributorResource.php
- │
- ├── Models/
+ │    │    └── CommissionResource.php
+ │    │    └── DistributorResource.php
+ │    │    └── InvoiceDetailResource.php
+ │    │    └── InvoiceItemResource.php
+ │    │
+ ├────Models/
  │    ├── Product.php
  │    ├── User.php
  │    └── OrderItem.php
  │    └── Order.php
- │
- ├── Repositories/
+ │    
+ ├────Repositories/
  │    ├── Contracts/
  │    │    ├── CommissionRepositoryInterface.php
  │    │    └── DistributorRepositoryInterface.php
@@ -161,28 +164,28 @@ app/
  │         ├── CommissionRepository.php
  │         └── DistributorRepository.php
  │
- ├── Services/
+ ├────Services/
  │    ├── CommissionService.php
  │    └── DistributorService.php
  │
- ├── Providers/
+ ├────Providers/
  │    ├── RepositoryServiceProvider.php
  │    └── ...
  database/
- ├── migrations/
+ ├────migrations/
  │    ├── 2023_XX_XX_XXXXXX_create_commission_view.php
  │    ├── 2023_XX_XX_XXXXXX_create_distributor_sales_view.php
  │    └── ...
  │
 routes/
- ├── api.php
- └── web.php
+ ├────api.php
+ └────web.php
  │
 tests/
- ├── Feature/
+ ├────Feature/
  │    ├── CommissionApiTest.php
  │    └── DistributorApiTest.php
- └── Unit/
+ └────Unit/
       ├── CommissionRepositoryTest.php
       └── DistributorRepositoryTest.php
 ```
@@ -197,7 +200,7 @@ tests/
 
 ---
 
-## 🧰 Troubleshooting
+## Troubleshooting
 
 If tests fail due to missing views:
 

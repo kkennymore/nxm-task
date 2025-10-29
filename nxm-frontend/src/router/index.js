@@ -22,7 +22,6 @@ const routes = [
         path: '/commissions/:id',
         name: "commission-items",
         component: CommissionsItemsView,
-        props: true
     },
     {
         path: appEndpoint.distributors,

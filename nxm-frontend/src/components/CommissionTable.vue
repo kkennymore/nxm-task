@@ -1,10 +1,32 @@
 
 <script setup>
-import appEndpoint from '@/config/appEndpoint';
+import { onMounted, ref } from "vue";
+import apiEndpoint from '@/config/apiEndpoint';
+import RequestService from "@/services/RequestService.js";
+import ViewInvoiceItem from "./ViewInvoiceItem.vue";
+
+const loading = ref(false);
+const isFetchInvoice = ref(false);
+const invoiceData = ref([]);
+
 defineProps({
   data: { type: Array, required: true },
   loading: { type: Boolean, default: false },
 });
+
+function setLoading(value) {
+  loading.value = value;
+}
+const fetchInvoice = async (e, id) =>{
+  e.preventDefault();
+  isFetchInvoice.value = true;
+  setLoading(true);
+
+  const response = await RequestService.get(`${apiEndpoint.commissions}?${query}`, {isLoading: setLoading});
+
+  invoiceData.value = response.data || [];
+  setLoading(false);
+}
 </script>
 <template>
   <div>
@@ -39,12 +61,15 @@ defineProps({
           <td class="border px-3 py-2 text-right">{{ item.percentage }}%</td>
           <td class="border px-3 py-2 text-right font-medium">{{ item.commission }}</td>
           <td class="border px-3 py-2 text-right font-medium">
-          <router-link :to="`${appEndpoint.commissionItems}/${item.invoice}`">
+          <button @click="(e) => fetchInvoice(e, item)">
             View Items
-          </router-link>
+          </button>
         </td>
         </tr>
       </tbody>
     </table>
+    <div v-if="isFetchInvoice" class="invoice-view-container-wrap">
+      <ViewInvoiceItem :data="invoiceData.value"/>
+    </div>
   </div>
 </template>
