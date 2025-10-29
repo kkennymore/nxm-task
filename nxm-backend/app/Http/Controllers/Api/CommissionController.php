@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommissionFilterRequest;
+use App\Http\Requests\ShowInvoiceRequest;
 use App\Http\Resources\CommissionResource;
+use App\Http\Resources\InvoiceDetailResource;
 use Illuminate\Http\Request;
 use App\Services\CommissionService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -36,5 +38,25 @@ class CommissionController extends Controller
         $data = $this->commissionService->getCommissionReport($filters);
 
         return CommissionResource::collection($data);
+    }
+
+    public function show(ShowInvoiceRequest $request)
+    {
+        $invoice = $request->validated()['invoice'];
+
+        $details = $this->commissionService->getInvoiceDetails($invoice);
+
+        if (empty($details)) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Invoice not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'status'  => true,
+            'message' => 'Invoice details retrieved successfully.',
+            'data'    => (new InvoiceDetailResource($details))->resolve(),
+        ]);
     }
 }
