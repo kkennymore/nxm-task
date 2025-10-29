@@ -14,7 +14,7 @@ const learnMore = () => {
         <div class="learnmore-container">
             <h1>WOULD YOU LIKE TO LEARN MORE?</h1>
             <p>
-                <ConnectBtn :btnImg="sitename" :method="learnMore" btn-text="Connect with Ben" />
+                <ConnectBtn :btnImg="sitename" :method="learnMore" btn-text="Connect with Ben" textAlign="right"/>
             </p>
         </div>
         </CustomAnimation>

@@ -1,10 +1,10 @@
 /* Universal Reset */
 @font-face {
-  font-family: 'Gotham light';
-  src: url('./../../fonts/Gotham/Gotham Light/Gotham Light.otf');
-       /* url('@/assets/fonts/Gotham-Bold.ttf') format('truetype'); */
-  font-weight: 400;
-  font-style: normal;
+    font-family: 'Gotham light';
+    src: url('./../../fonts/Gotham/Gotham Light/Gotham Light.otf');
+    /* url('@/assets/fonts/Gotham-Bold.ttf') format('truetype'); */
+    font-weight: 400;
+    font-style: normal;
 }
 
 *,
@@ -19,19 +19,34 @@
     text-decoration: none;
     font-weight: 400;
     vertical-align: baseline;
-    -webkit-text-size-adjust: 100%; /* Ensure font size adjustment consistency on mobile */
+    -webkit-text-size-adjust: 100%;
+    /* Ensure font size adjustment consistency on mobile */
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility; /* Improve font rendering for clarity */
+    text-rendering: optimizeLegibility;
+    /* Improve font rendering for clarity */
 }
 
 /* Ensure HTML5 elements behave consistently */
-article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
     display: block;
 }
 
 /* Make sure inline-block elements behave properly */
-audio, canvas, progress, video {
+audio,
+canvas,
+progress,
+video {
     display: inline-block;
     vertical-align: baseline;
 }
@@ -58,12 +73,14 @@ img {
 
 /* Fix SVG colors */
 svg {
-    fill: currentColor; /* Make SVG inherit the color of its parent */
+    fill: currentColor;
+    /* Make SVG inherit the color of its parent */
     color: #788995;
 }
 
 /* Remove default list styles */
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
@@ -88,41 +105,47 @@ html {
 a:hover,
 a:focus {
     text-decoration: none;
-    color: #007BFF; /* Change color on hover for native feel */
+    color: #007BFF;
+    /* Change color on hover for native feel */
     transform: scale(1.05);
     border-bottom: 1px solid #005BB5;
 }
 
 /* Active state for links (e.g., when clicked) */
 a:active {
-    color: #005BB5; /* Darker color on click */
+    color: #005BB5;
+    /* Darker color on click */
 }
 
 /* Input, select, and textarea resets for smooth native feel */
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
     border: none;
-    border-radius: 8px; /* Round borders for a modern, native feel */
+    border-radius: 8px;
+    /* Round borders for a modern, native feel */
     padding: 12px 16px;
     font-size: 16px;
     line-height: 1.5;
-    background-color: #f5f5f5; /* Subtle background color */
-    transition: all 0.3s ease; /* Smooth transition for focus and interactions */
-}
-
-button {
-    background-color: #456276; /* Subtle button color */
-    color: white;
-    cursor: pointer;
+    background-color: #f5f5f5;
+    /* Subtle background color */
+    transition: all 0.3s ease;
+    /* Smooth transition for focus and interactions */
 }
 
 /* Focus states for form inputs */
-input:focus, select:focus, textarea:focus, button:focus {
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
     background-color: #e2e9f0;
     border: 2px solid #007BFF;
 }
 
 /* Native Image blend mode for background images */
-img, .picture img {
+img,
+.picture img {
     mix-blend-mode: multiply;
     transition: mix-blend-mode 0.2s ease;
 }
@@ -132,12 +155,6 @@ img:hover {
     opacity: 0.9;
 }
 
-/* Smooth animation for page load */
-body {
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-}
-
 @keyframes fadeIn {
     to {
         opacity: 1;
@@ -145,11 +162,23 @@ body {
 }
 
 /* Remove default spacing around body */
+html,
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    color: #333; /* Neutral text color */
+    color: #333;
+    /* Neutral text color */
     line-height: 1.5;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    height: 100%;
+    touch-action: manipulation;
+}
+
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none !important;
+    user-select: none;
 }
 
 /* Ensure native-like modal and dialog box feel */
@@ -161,13 +190,16 @@ dialog {
 }
 
 /* Focused form elements */
-input:focus, button:focus, select:focus, textarea:focus {
+input:focus,
+button:focus,
+select:focus,
+textarea:focus {
     outline: none;
     border: 2px solid #416887;
-    background-color: #e9f1f9; /* Subtle background for focus */
+    background-color: #e9f1f9;
+    /* Subtle background for focus */
 }
 
-/* Transition effects for smooth interactions */
 button:hover,
 input:hover,
 select:hover,
@@ -177,10 +209,9 @@ textarea:hover {
 }
 
 button:active {
-    transform: scale(0.98); /* Slightly shrink on click for button feedback */
+    transform: scale(0.98);
 }
 
-/* Native-like scrollbars */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -194,7 +225,66 @@ button:active {
     background-color: #666;
 }
 
-.container{
+input,
+textarea,
+select {
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select::-ms-expand {
+    display: none !important;
+}
+
+select option {
+    background-color: #04683e14 !important;
+    color: #222222 !important;
+    padding: 8px !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Ensure no zooming on mobile devices */
+@viewport {
+    zoom: 1;
+}
+
+a,
+a:active,
+a:visited,
+a:link,
+a:focus {
+    text-decoration: none !important;
+    outline: none !important;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+button {
+    background-color: #456276;
+    /* Subtle button color */
+    color: white;
+    cursor: pointer;
+}
+
+.container {
     width: 100%;
     height: auto;
     max-width: 1300px;

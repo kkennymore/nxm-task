@@ -1,0 +1,29 @@
+.snack-message {
+    position: fixed;
+    width: 100%;
+    max-width: 500px;
+    min-width: 100px;
+    right: 8.5%;
+    float: right;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+    z-index: 1500;
+    transition: all 0.3s ease-in-out;
+    background-color: aliceblue;
+  }
+  .snack-message.success {
+    color: green;
+  }
+  
+  .snack-message.error {
+    color: darkred;
+  }
+  
+  .close-btn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  

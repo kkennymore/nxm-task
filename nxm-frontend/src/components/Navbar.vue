@@ -2,8 +2,8 @@
 import { RouterLink } from 'vue-router';
 import apiEndpoint from '../router/appEndpoint';
 import { Facebook, Linkedin, Instagram, Twitter, Menu, X } from 'lucide-vue-next';
-import logo from "@/assets/logo.webp";
-import CustomAnimation from '@/components/CustomAnimation.vue';
+import logo from "../assets/logo.webp";
+import CustomAnimation from './CustomAnimation.vue';
 </script>
 
 <template>
@@ -17,7 +17,7 @@ import CustomAnimation from '@/components/CustomAnimation.vue';
 
         <div class="nav-link-content-wrapper">
           <span class="icon-mobile">
-            <Menu :size="20" />
+           <Menu :size="20" />
           </span>
           <!-- Center Navigation Links -->
           <ul class="nav-links-wrap">

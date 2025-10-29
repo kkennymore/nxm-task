@@ -14,10 +14,10 @@
   overflow: hidden;
   text-decoration: none;
   transition: background 0.3s ease;
+  background-color: #456276;
 }
 
 .button-container span{
-    text-align: right;
     min-width: 180px;
     position: absolute;
     right: 8%;

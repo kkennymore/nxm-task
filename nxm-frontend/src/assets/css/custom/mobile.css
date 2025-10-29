@@ -170,7 +170,7 @@
     }
     .formwrap{
         padding: auto 0;
-
+        background-color: #ffffff !important;
         width: 100%;
         min-width: 100%;
         margin: 0;
@@ -181,6 +181,13 @@
         padding: 0;
          min-width: 100%;
         margin: 0;
+        box-shadow: none;
+    }
+    .form-content form{
+        padding: 0;
+    }
+    .form-content form input{
+        overflow-y: hidden !important;
     }
 
     .form-content img {

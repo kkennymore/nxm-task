@@ -4,7 +4,14 @@
 
 
 @layer base {
-  @font-face {
+@font-face {
+  font-family: 'Gotham';
+  src: url('@/assets/fonts/Gotham-Regular.woff2') format('woff2'),
+       url('@/assets/fonts/Gotham-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+  /* @font-face {
     font-family: Proxima Nova;
     font-weight: 400;
     src: url(/fonts/proxima-nova/400-regular.woff) format("woff");
@@ -13,8 +20,8 @@
     font-family: Proxima Nova;
     font-weight: 500;
     src: url(/fonts/proxima-nova/500-medium.woff) format("woff");
-  }
-} */
+  } */
+/* } */
 
 /* src/assets/styles/fonts.css */
 /* @font-face {
@@ -23,10 +30,9 @@
        url('@/assets/fonts/Gotham-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-} */
-
+}  */
+ 
 @import url("./custom/reset.css");
-@import url("./custom/theme.css");
 @import url("./custom/navbar.css");
 @import url("./custom/banner.css");
 @import url("./custom/area.css");
@@ -34,6 +40,14 @@
 @import url("./custom/influencer.css");
 @import url("./custom/btnComponent.css");
 @import url("./custom/learnmore.css");
+@import url("./custom/toast.css");
 @import url("./custom/footer.css");
-@import url("./custom/register.css");
+@import url("./custom/formsection.css");
+@import url("./custom/formInput.css");
 @import url("./custom/mobile.css");
+
+/* 
+@import "../../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css";
+@import "../../../node_modules/bootstrap/dist/css/bootstrap-utilities.css";
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css"; */
