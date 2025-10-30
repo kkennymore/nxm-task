@@ -1,0 +1,125 @@
+/* ========== Overlay (dim background) ========== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* align bottom */
+  z-index: 9999;
+}
+
+/* ========== Bottom Sheet Container ========== */
+.modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 16px 16px 0 0;
+  padding: 2rem;
+  height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.4s ease forwards;
+}
+
+/* ========== Slide-in / Slide-out Transition ========== */
+.bottom-sheet-enter-active,
+.bottom-sheet-leave-active {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+.bottom-sheet-enter-from {
+  transform: translateY(100%);
+  opacity: 0;
+}
+.bottom-sheet-enter-to {
+  transform: translateY(0);
+  opacity: 1;
+}
+.bottom-sheet-leave-from {
+  transform: translateY(0);
+  opacity: 1;
+}
+.bottom-sheet-leave-to {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+/* ========== Elements inside modal ========== */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #3c5566;
+  outline: none;
+}
+
+.button-wrap {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.submit-btn {
+  background: #456276;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #6b92ac;
+}
+
+/* Optional scroll behavior for long content */
+.modal-container::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}

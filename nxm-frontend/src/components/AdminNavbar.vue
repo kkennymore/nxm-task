@@ -22,13 +22,13 @@ import CustomAnimation from './CustomAnimation.vue';
           <!-- Center Navigation Links -->
           <ul class="nav-links-wrap">
             <li>
-              <RouterLink :to="appEndpoint.home">
+              <RouterLink :to="'/'+appEndpoint.admin">
                 Admin Home
               </RouterLink>
             </li>
             <li>
-              <RouterLink :to="appEndpoint.shop">
-                Shop
+              <RouterLink :to="'/'+appEndpoint.admin+'/'+appEndpoint.distributors">
+                Distributor
               </RouterLink>
             </li>
           </ul>

@@ -8,7 +8,7 @@ const loading = ref(false);
 const isFetchInvoice = ref(false);
 const invoiceData = ref([]);
 
-defineProps({
+const props = defineProps({
   commData: { type: Array, required: true },
   loading: { type: Boolean, default: false },
 });
@@ -44,8 +44,8 @@ const fetchInvoice = async (e, id) =>{
         </tr>
       </thead>
       <tbody>
-        <tr v-if="loading">
-          <td colspan="6" class="text-center py-3">Loading...</td>
+        <tr v-if="props.loading">
+          <td colspan="6" :style="{height: '200px', margin: '100px auto !important'}" class="text-center py-3" >Loading...</td>
         </tr>
         <tr v-else-if="!commData.length">
           <td colspan="6" class="text-center py-3">No records found</td>

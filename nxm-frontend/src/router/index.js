@@ -24,7 +24,7 @@ const routes = [
     ],
   },
   {
-    path: '/admin',
+    path: '/'+appEndpoint.admin,
     component: AdminLayout,
     children: [
       {

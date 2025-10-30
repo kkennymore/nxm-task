@@ -14,6 +14,7 @@ const props = defineProps({
   inputType: { type: String, default: 'text' },
   isBtn: Boolean,
   isForm: Boolean,
+  isTextArea: Boolean,
   isText: Boolean,
   isSelect: Boolean,
   required: Boolean,
@@ -78,6 +79,15 @@ const selectLabel = (option) =>
       <!-- Static text -->
       <div v-if="props.isText">
         <span :style="props.textValueStyle">{{ props.textValueData }}</span>
+      </div>
+
+      <div v-if="props.isTextArea">
+       <textarea 
+        @input="(e) => props.callBack(e)" 
+        :name="fieldName" rows="4"  
+        :value="props.formValueData"
+        :placeholder="`${props.text}${props.required ? ' *' : ' (optional)'}`" 
+        :class="props.errorsData ? 'error' : ''"></textarea>
       </div>
 
       <!-- Select -->

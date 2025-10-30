@@ -4,6 +4,7 @@ const apiEndpoint = {
     home: `${baseUrl}/`,
     distributors: `${baseUrl}/api/v1/distributors/top`,
     commissions: `${baseUrl}/api/v1/commissions`,
+    contact: `${baseUrl}/api/v1/contact`
 };
 
 export default apiEndpoint;
